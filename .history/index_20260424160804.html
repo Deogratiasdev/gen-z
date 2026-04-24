@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen Z Quiz - Chimie Organique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 100%);
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            text-align: center;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid rgba(27, 94, 32, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(27, 94, 32, 0.2);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #1B5E20;
+            box-shadow: 0 0 20px rgba(27, 94, 32, 0.3);
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1B5E20;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #B0B0B0;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #B0B0B0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .warning {
+            background: rgba(255, 152, 0, 0.1);
+            border: 1px solid rgba(255, 152, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: #FF9800;
+        }
+
+        .download-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 20px rgba(27, 94, 32, 0.3);
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 30px rgba(27, 94, 32, 0.4);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #666666;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .description {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="gen_z_app/gen.jpeg" alt="Gen Z Quiz Logo" class="logo">
+        
+        <h1>Gen Z Quiz</h1>
+        <p class="subtitle">Chimie Organique</p>
+        
+        <p class="description">
+            Application de QCM interactive pour tester vos connaissances en chimie organique. 
+            Conçue pour les exposés et présentations éducatives.
+        </p>
+        
+        <div class="warning">
+            ⚠️ <strong>Important :</strong> Cette application n'est pas signée numériquement. 
+            Votre téléphone peut afficher une alerte de sécurité lors de l'installation. 
+            C'est normal ! Il suffit d'autoriser l'installation depuis les paramètres.
+        </div>
+        
+        <a href="https://github.com/Deogratiasdev/app/raw/main/releases/genz.apk" class="download-button">
+            📱 Télécharger genz.apk
+        </a>
+        
+        <div class="footer">
+            <p>Créé par Hilary KPANOU & Andy CHADARE</p>
+            <p>© 2026 - Version 1.0.0</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gen Z Quiz - Chimie Organique</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0A0A0A 0%, #1a1a1a 100%);
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            max-width: 600px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #1B5E20;
+            box-shadow: 0 0 15px rgba(27, 94, 32, 0.3);
+            margin-right: 15px;
+            vertical-align: middle;
+        }
+
+        .title-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1B5E20;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #B0B0B0;
+            margin-bottom: 30px;
+        }
+
+        .description {
+            font-size: 1rem;
+            color: #B0B0B0;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .warning {
+            padding: 15px;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            color: #FF9800;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 50%, #4CAF50 100%);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 15px rgba(27, 94, 32, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .download-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 25px rgba(27, 94, 32, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 50%, #66BB6A 100%);
+        }
+
+        .download-button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 10px rgba(27, 94, 32, 0.4);
+        }
+
+        .download-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .download-button:hover::before {
+            left: 100%;
+        }
+
+        .download-button i {
+            font-size: 1.1rem;
+            animation: pulse 2s infinite;
+        }
+
+        .code-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 50%, #1565C0 100%);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 15px rgba(33, 150, 243, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 15px;
+        }
+
+        .code-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 25px rgba(33, 150, 243, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            background: linear-gradient(135deg, #1976D2 0%, #1565C0 50%, #0D47A1 100%);
+        }
+
+        .code-button:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 10px rgba(33, 150, 243, 0.4);
+        }
+
+        .code-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .code-button:hover::before {
+            left: 100%;
+        }
+
+        .code-button i {
+            font-size: 1.1rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-5px);
+            }
+            60% {
+                transform: translateY(-3px);
+            }
+        }
+
+        .footer {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(27, 94, 32, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(27, 94, 32, 0.1);
+            text-align: center;
+        }
+
+        .footer-creators {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1B5E20;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-creators i {
+            font-size: 0.9rem;
+        }
+
+        .footer-version {
+            font-size: 0.85rem;
+            color: #B0B0B0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .footer-version i {
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .description {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="title-container">
+            <img src="gen_z_app/gen.jpeg" alt="Gen Z Quiz Logo" class="logo">
+            <h1>Gen Z Quiz</h1>
+        </div>
+        <p class="subtitle">Chimie Organique</p>
+        
+        <p class="description">
+            Application de QCM interactive pour tester vos connaissances en chimie organique. 
+            Conçue pour les exposés et présentations éducatives.
+        </p>
+        
+        <div class="warning">
+            <i class="fas fa-exclamation-triangle"></i> <strong>Important :</strong> Cette application n'est pas signée numériquement. 
+            Votre téléphone peut afficher une alerte de sécurité lors de l'installation. 
+            C'est normal ! Il suffit d'autoriser l'installation depuis les paramètres.
+        </div>
+        
+        <a href="https://github.com/Deogratiasdev/app/raw/main/releases/genz.apk" class="download-button">
+            <i class="fas fa-download"></i>
+            Télécharger genz.apk
+        </a>
+        
+        <div class="footer">
+            <div class="footer-creators">
+                <i class="fas fa-code"></i>
+                Créé par Hilary KPANOU & Andy CHADARE
+                <i class="fas fa-heart"></i>
+            </div>
+            <div class="footer-version">
+                <i class="far fa-copyright"></i>
+                2026 - Version 1.0.0
+                <i class="fas fa-rocket"></i>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
