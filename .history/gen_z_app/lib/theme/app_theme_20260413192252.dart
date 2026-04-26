@@ -38,8 +38,8 @@ class AppTheme {
   static const Color accentQuaternary = Color(0xFFFFD93D);
 
   // Feedback
-  static const Color correct = Color(0xFF4CAF50);
-  static const Color incorrect = Color(0xFFFF5252);
+  static const Color correct = Color(0xFF00D4AA);
+  static const Color incorrect = Color(0xFFFF6B6B);
   static const Color warning = Color(0xFFFFD93D);
 
   // Gradients

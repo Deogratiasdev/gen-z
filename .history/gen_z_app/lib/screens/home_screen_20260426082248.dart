@@ -18,7 +18,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final _ageController = TextEditingController();
   bool _isEditing = false;
   bool _isLoading = true;
-  bool _isInfoExpanded = false;
   Map<String, dynamic>? _userStats;
 
   @override
@@ -82,6 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: const Icon(Icons.more_vert, color: AppTheme.textPrimary),
             onSelected: (value) {
               if (value == 'refresh') _loadUserData();
+              if (value == 'about') _navigateToAbout();
               if (value == 'logout') _showLogoutConfirmSheet(context);
             },
             itemBuilder: (context) => [
@@ -92,6 +92,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     Icon(Icons.refresh, size: 20),
                     SizedBox(width: 8),
                     Text('Actualiser'),
+                  ],
+                ),
+              ),
+              const PopupMenuItem(
+                value: 'about',
+                child: Row(
+                  children: [
+                    Icon(Icons.info_outline, size: 20),
+                    SizedBox(width: 8),
+                    Text('À propos'),
                   ],
                 ),
               ),
@@ -148,92 +158,40 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 32),
-                  // Section Profil avec plier/déplier
-                  GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _isInfoExpanded = !_isInfoExpanded;
-                      });
-                    },
-                    child: Container(
+                  // Section Profil
+                  Text(
+                    'Informations',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: AppTheme.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Card(
+                    color: AppTheme.surface,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    child: Padding(
                       padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: AppTheme.surface,
-                        borderRadius: BorderRadius.circular(16),
-                      ),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Informations',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(color: AppTheme.textPrimary),
-                              ),
-                              const Spacer(),
-                              AnimatedRotation(
-                                turns: _isInfoExpanded ? 0.5 : 0,
-                                duration: const Duration(milliseconds: 300),
-                                child: const Icon(
-                                  Icons.expand_more,
-                                  color: AppTheme.textPrimary,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
+                          // Nom
+                          _buildTextField(
+                            'Nom',
+                            _nameController,
+                            enabled: _isEditing,
                           ),
-                          const SizedBox(height: 4),
-                          Text(
-                            _isInfoExpanded
-                                ? 'Tapoter pour replier'
-                                : 'Tapoter pour déplier',
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  color: AppTheme.textMuted,
-                                  fontSize: 12,
-                                ),
+                          const SizedBox(height: 16),
+                          // Age
+                          _buildTextField(
+                            'Âge',
+                            _ageController,
+                            keyboardType: TextInputType.number,
+                            enabled: _isEditing,
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  // Contenu pliable
-                  AnimatedSize(
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: _isInfoExpanded
-                        ? Card(
-                            color: AppTheme.surface,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                children: [
-                                  // Nom
-                                  _buildTextField(
-                                    'Nom',
-                                    _nameController,
-                                    enabled: _isEditing,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  // Age
-                                  _buildTextField(
-                                    'Âge',
-                                    _ageController,
-                                    keyboardType: TextInputType.number,
-                                    enabled: _isEditing,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        : const SizedBox.shrink(),
                   ),
                   const SizedBox(height: 16),
                   // Bouton modifier/sauvegarder
@@ -502,6 +460,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _navigateToAbout() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AboutScreen()),
     );
   }
 }

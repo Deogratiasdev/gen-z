@@ -161,40 +161,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: AppTheme.surface,
                         borderRadius: BorderRadius.circular(16),
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Informations',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineMedium
-                                    ?.copyWith(color: AppTheme.textPrimary),
-                              ),
-                              const Spacer(),
-                              AnimatedRotation(
-                                turns: _isInfoExpanded ? 0.5 : 0,
-                                duration: const Duration(milliseconds: 300),
-                                child: const Icon(
-                                  Icons.expand_more,
-                                  color: AppTheme.textPrimary,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
                           Text(
-                            _isInfoExpanded
-                                ? 'Tapoter pour replier'
-                                : 'Tapoter pour déplier',
-                            style: Theme.of(context).textTheme.bodySmall
-                                ?.copyWith(
-                                  color: AppTheme.textMuted,
-                                  fontSize: 12,
-                                ),
+                            'Informations',
+                            style: Theme.of(context).textTheme.headlineMedium
+                                ?.copyWith(color: AppTheme.textPrimary),
+                          ),
+                          const Spacer(),
+                          AnimatedRotation(
+                            turns: _isInfoExpanded ? 0.5 : 0,
+                            duration: const Duration(milliseconds: 300),
+                            child: const Icon(
+                              Icons.expand_more,
+                              color: AppTheme.textPrimary,
+                              size: 24,
+                            ),
                           ),
                         ],
                       ),

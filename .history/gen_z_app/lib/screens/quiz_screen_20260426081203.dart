@@ -60,9 +60,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   late AnimationController _feedbackController;
   late Animation<double> _feedbackScale;
 
-  // Scroll controller
-  late ScrollController _scrollController;
-
   _ShuffledQuestion get _currentQuestion => _shuffledQuestions[_currentIndex];
   bool get _isLastQuestion => _currentIndex == widget.questions.length - 1;
 
@@ -72,7 +69,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     _startTime = DateTime.now();
     _answers = [];
     _shuffledQuestions = _shuffleAllQuestions();
-    _scrollController = ScrollController();
     _initAnimations();
     _initTimer();
   }
@@ -128,17 +124,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
 
     _feedbackController.forward();
 
-    // Scroll vers le bas après un court délai pour laisser le temps à l'animation
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeOut,
-        );
-      }
-    });
-
     _answers.add(
       QuestionAnswer(
         question: _currentQuestion.original,
@@ -182,17 +167,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     if (_isCorrect) {
       _score += 10;
       _correctCount++;
-    } else {
-      // Scroll vers le bas en cas de mauvaise réponse
-      Future.delayed(const Duration(milliseconds: 300), () {
-        if (_scrollController.hasClients) {
-          _scrollController.animateTo(
-            _scrollController.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut,
-          );
-        }
-      });
     }
 
     _feedbackController.forward();
@@ -245,7 +219,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   void dispose() {
     _feedbackController.dispose();
     _timerController.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -263,7 +236,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
             _buildProgressBar(progress),
             Expanded(
               child: SingleChildScrollView(
-                controller: _scrollController,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

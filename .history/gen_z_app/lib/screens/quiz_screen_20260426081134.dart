@@ -60,9 +60,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   late AnimationController _feedbackController;
   late Animation<double> _feedbackScale;
 
-  // Scroll controller
-  late ScrollController _scrollController;
-
   _ShuffledQuestion get _currentQuestion => _shuffledQuestions[_currentIndex];
   bool get _isLastQuestion => _currentIndex == widget.questions.length - 1;
 
@@ -72,7 +69,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     _startTime = DateTime.now();
     _answers = [];
     _shuffledQuestions = _shuffleAllQuestions();
-    _scrollController = ScrollController();
     _initAnimations();
     _initTimer();
   }
@@ -128,17 +124,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
 
     _feedbackController.forward();
 
-    // Scroll vers le bas après un court délai pour laisser le temps à l'animation
-    Future.delayed(const Duration(milliseconds: 300), () {
-      if (_scrollController.hasClients) {
-        _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 500),
-          curve: Curves.easeOut,
-        );
-      }
-    });
-
     _answers.add(
       QuestionAnswer(
         question: _currentQuestion.original,
@@ -182,17 +167,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     if (_isCorrect) {
       _score += 10;
       _correctCount++;
-    } else {
-      // Scroll vers le bas en cas de mauvaise réponse
-      Future.delayed(const Duration(milliseconds: 300), () {
-        if (_scrollController.hasClients) {
-          _scrollController.animateTo(
-            _scrollController.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut,
-          );
-        }
-      });
     }
 
     _feedbackController.forward();
@@ -245,7 +219,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   void dispose() {
     _feedbackController.dispose();
     _timerController.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -263,7 +236,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
             _buildProgressBar(progress),
             Expanded(
               child: SingleChildScrollView(
-                controller: _scrollController,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -412,7 +384,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         Text(
           'Question ${_currentIndex + 1}',
           style: Theme.of(context).textTheme.labelLarge?.copyWith(
-            color: AppTheme.textPrimary,
+            color: AppTheme.primaryGreen,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -432,10 +404,14 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
       decoration: BoxDecoration(
         color: AppTheme.surface,
         borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: AppTheme.primaryGreen.withOpacity(0.2),
+          width: 2,
+        ),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.accentPrimary.withOpacity(0.08),
-            blurRadius: 16,
+            color: AppTheme.primaryGreen.withOpacity(0.1),
+            blurRadius: 12,
             offset: const Offset(0, 4),
           ),
         ],
@@ -446,13 +422,13 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppTheme.accentPrimary.withOpacity(0.08),
+              color: AppTheme.primaryGreen.withOpacity(0.15),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
               'Question ${_currentIndex + 1}/${widget.questions.length}',
               style: TextStyle(
-                color: AppTheme.textPrimary,
+                color: AppTheme.primaryGreen,
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
                 letterSpacing: 0.5,
@@ -666,11 +642,11 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         child: ElevatedButton(
           onPressed: _nextQuestion,
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppTheme.accentPrimary,
+            backgroundColor: AppTheme.primaryGreen,
             foregroundColor: Colors.white,
             minimumSize: const Size(double.infinity, 48),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(12),
             ),
             elevation: 0,
           ),
@@ -704,12 +680,12 @@ class _OptionButton extends StatelessWidget {
   Color get _backgroundColor {
     if (!showFeedback) {
       return isSelected
-          ? AppTheme.accentPrimary.withOpacity(0.08)
+          ? AppTheme.accentPrimary.withOpacity(0.15)
           : AppTheme.surface;
     }
-    if (isCorrect) return AppTheme.correct.withOpacity(0.08);
-    if (isSelected && !isCorrect) return AppTheme.incorrect.withOpacity(0.08);
-    return AppTheme.surface.withOpacity(0.3);
+    if (isCorrect) return AppTheme.correct.withOpacity(0.15);
+    if (isSelected && !isCorrect) return AppTheme.incorrect.withOpacity(0.15);
+    return AppTheme.surface.withOpacity(0.5);
   }
 
   Color get _textColor {
@@ -765,17 +741,30 @@ class _OptionButton extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: _backgroundColor == AppTheme.surface
-                    ? AppTheme.surfaceLight
-                    : _backgroundColor.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(12),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    _backgroundColor == AppTheme.surface
+                        ? AppTheme.surfaceLight
+                        : _backgroundColor,
+                    _backgroundColor == AppTheme.surface
+                        ? AppTheme.surfaceLight.withOpacity(0.7)
+                        : _backgroundColor.withOpacity(0.7),
+                  ],
+                ),
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(
+                  color: _textColor.withOpacity(0.2),
+                  width: 1,
+                ),
               ),
               child: Center(
                 child: Text(
                   String.fromCharCode(65 + index),
                   style: TextStyle(
                     color: _textColor,
-                    fontWeight: FontWeight.w700,
+                    fontWeight: FontWeight.w800,
                     fontSize: 20,
                     letterSpacing: -0.5,
                   ),

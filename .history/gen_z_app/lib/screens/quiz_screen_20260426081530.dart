@@ -182,17 +182,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
     if (_isCorrect) {
       _score += 10;
       _correctCount++;
-    } else {
-      // Scroll vers le bas en cas de mauvaise réponse
-      Future.delayed(const Duration(milliseconds: 300), () {
-        if (_scrollController.hasClients) {
-          _scrollController.animateTo(
-            _scrollController.position.maxScrollExtent,
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeOut,
-          );
-        }
-      });
     }
 
     _feedbackController.forward();
@@ -245,7 +234,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
   void dispose() {
     _feedbackController.dispose();
     _timerController.dispose();
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -263,7 +251,6 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
             _buildProgressBar(progress),
             Expanded(
               child: SingleChildScrollView(
-                controller: _scrollController,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
