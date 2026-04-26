@@ -1,13 +1,3 @@
-// ============================================================================
-// SERVICE DE CONNEXION À LA BASE DE DONNÉES
-// ----------------------------------------------------------------------------
-// Ce fichier gère la connexion avec Supabase (base de données en ligne) :
-// - Initialisation de la connexion au démarrage de l'app
-// - Gestion de l'authentification (connexion/déconnexion)
-// - Accès sécurisé aux données utilisateurs
-// - Configuration centralisée du backend
-// ============================================================================
-
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseService {

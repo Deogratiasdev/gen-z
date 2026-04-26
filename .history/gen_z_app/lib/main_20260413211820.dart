@@ -1,14 +1,3 @@
-// ============================================================================
-// POINT D'ENTRÉE DE L'APPLICATION
-// ----------------------------------------------------------------------------
-// Ce fichier est le point de départ de l'application Gen Z Quiz :
-// - Initialisation de Flutter et des services
-// - Configuration de Supabase (base de données)
-// - Définition de l'orientation (portrait uniquement)
-// - Lancement de l'application avec le thème
-// - Gestion de la navigation initiale (bienvenue ou accueil)
-// ============================================================================
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

@@ -1,13 +1,3 @@
-// ============================================================================
-// SERVICE DE STOCKAGE LOCAL
-// ----------------------------------------------------------------------------
-// Ce fichier gère la sauvegarde des données sur l'appareil :
-// - Enregistrement de l'historique des QCM
-// - Sauvegarde des préférences utilisateur
-// - Stockage persistant même hors connexion
-// - Récupération rapide des données locales
-// ============================================================================
-
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/question.dart';
@@ -15,11 +5,11 @@ import '../models/question.dart';
 class StorageService {
   static const String _historyKey = 'quiz_history';
   static const String _themeKey = 'app_theme';
-
+  
   static Future<void> saveQuizResult(QuizResult result) async {
     final prefs = await SharedPreferences.getInstance();
     final history = await getHistory();
-
+    
     final historyItem = HistoryItem(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       category: result.category,
@@ -32,19 +22,19 @@ class StorageService {
       date: DateTime.now(),
       answers: result.answers,
     );
-
+    
     history.insert(0, historyItem);
-
+    
     final jsonList = history.map((e) => e.toJson()).toList();
     await prefs.setString(_historyKey, jsonEncode(jsonList));
   }
-
+  
   static Future<List<HistoryItem>> getHistory() async {
     final prefs = await SharedPreferences.getInstance();
     final jsonString = prefs.getString(_historyKey);
-
+    
     if (jsonString == null) return [];
-
+    
     try {
       final jsonList = jsonDecode(jsonString) as List;
       return jsonList.map((e) => HistoryItem.fromJson(e)).toList();
@@ -52,17 +42,17 @@ class StorageService {
       return [];
     }
   }
-
+  
   static Future<void> clearHistory() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_historyKey);
   }
-
+  
   static Future<void> saveTheme(String themeColor) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(_themeKey, themeColor);
   }
-
+  
   static Future<String> getTheme() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(_themeKey) ?? 'default';
@@ -105,15 +95,11 @@ class HistoryItem {
       'grade': grade,
       'duration': duration.inSeconds,
       'date': date.toIso8601String(),
-      'answers': answers
-          .map(
-            (a) => {
-              'questionId': a.question.id,
-              'selectedIndex': a.selectedIndex,
-              'isCorrect': a.isCorrect,
-            },
-          )
-          .toList(),
+      'answers': answers.map((a) => {
+        'questionId': a.question.id,
+        'selectedIndex': a.selectedIndex,
+        'isCorrect': a.isCorrect,
+      }).toList(),
     };
   }
 

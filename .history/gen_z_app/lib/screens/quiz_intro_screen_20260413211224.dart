@@ -1,13 +1,3 @@
-// ============================================================================
-// ÉCRAN D'INTRODUCTION AU QUIZ
-// ----------------------------------------------------------------------------
-// Ce fichier présente les options avant de démarrer le QCM :
-// - Sélection de la catégorie de questions (Hydrocarbures, Alcools, etc.)
-// - Choix du niveau de difficulté (Facile, Moyen, Difficile)
-// - Bouton pour lancer le quiz avec les paramètres choisis
-// - Interface claire et engaging pour préparer l'utilisateur
-// ============================================================================
-
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'quiz_screen.dart';

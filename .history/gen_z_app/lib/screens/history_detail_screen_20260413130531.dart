@@ -1,15 +1,3 @@
-// ============================================================================
-// ÉCRAN DE DÉTAIL D'UN RÉSULTAT
-// ----------------------------------------------------------------------------
-// Ce fichier affiche les détails complets d'un QCM spécifique :
-// - Score détaillé avec pourcentage
-// - Récapitulatif question par question
-// - Réponse donnée vs réponse correcte
-// - Temps passé sur le quiz
-// - Date et heure du passage
-// - Navigation retour vers l'historique
-// ============================================================================
-
 import 'package:flutter/material.dart';
 import '../services/storage_service.dart';
 import '../theme/app_theme.dart';

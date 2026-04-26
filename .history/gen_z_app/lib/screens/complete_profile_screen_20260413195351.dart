@@ -1,15 +1,3 @@
-// ============================================================================
-// ÉCRAN DE COMPLÉTION DU PROFIL
-// ----------------------------------------------------------------------------
-// Ce fichier permet aux nouveaux utilisateurs de compléter leur profil :
-// - Saisie du nom d'utilisateur
-// - Saisie de l'âge
-// - Validation des informations
-// - Enregistrement dans la base de données
-// - Redirection vers l'accueil après complétion
-// - Étape obligatoire après l'inscription
-// ============================================================================
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -41,16 +29,16 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
       vsync: this,
       duration: const Duration(milliseconds: 500),
     );
-    _shakeAnimation =
-        TweenSequence<double>([
-          TweenSequenceItem(tween: Tween(begin: 0, end: -10), weight: 1),
-          TweenSequenceItem(tween: Tween(begin: -10, end: 10), weight: 2),
-          TweenSequenceItem(tween: Tween(begin: 10, end: -10), weight: 2),
-          TweenSequenceItem(tween: Tween(begin: -10, end: 10), weight: 2),
-          TweenSequenceItem(tween: Tween(begin: 10, end: 0), weight: 1),
-        ]).animate(
-          CurvedAnimation(parent: _shakeController, curve: Curves.easeInOut),
-        );
+    _shakeAnimation = TweenSequence<double>([
+      TweenSequenceItem(tween: Tween(begin: 0, end: -10), weight: 1),
+      TweenSequenceItem(tween: Tween(begin: -10, end: 10), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: 10, end: -10), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: -10, end: 10), weight: 2),
+      TweenSequenceItem(tween: Tween(begin: 10, end: 0), weight: 1),
+    ]).animate(CurvedAnimation(
+      parent: _shakeController,
+      curve: Curves.easeInOut,
+    ));
   }
 
   @override
@@ -92,9 +80,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
         );
       }
     } catch (e) {
-      setState(
-        () => _errorMessage = 'Erreur lors de la sauvegarde. Réessayez.',
-      );
+      setState(() => _errorMessage = 'Erreur lors de la sauvegarde. Réessayez.');
       _shakeController.forward(from: 0);
     } finally {
       setState(() => _isLoading = false);
@@ -112,7 +98,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 40),
-
+              
               // Logo
               Center(
                 child: Hero(
@@ -137,9 +123,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                   ),
                 ),
               ),
-
+              
               const SizedBox(height: 32),
-
+              
               // Titre
               Text(
                 'Bienvenue !',
@@ -151,13 +137,13 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
               const SizedBox(height: 8),
               Text(
                 'Complétez votre profil pour continuer',
-                style: Theme.of(
-                  context,
-                ).textTheme.bodyLarge?.copyWith(color: AppTheme.textSecondary),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppTheme.textSecondary,
+                ),
               ),
-
+              
               const SizedBox(height: 32),
-
+              
               // Message d'erreur
               if (_errorMessage != null)
                 AnimatedBuilder(
@@ -175,19 +161,12 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                         ),
                         child: Row(
                           children: [
-                            Icon(
-                              Icons.error_outline,
-                              color: AppTheme.incorrect,
-                              size: 20,
-                            ),
+                            Icon(Icons.error_outline, color: AppTheme.incorrect, size: 20),
                             const SizedBox(width: 8),
                             Expanded(
                               child: Text(
                                 _errorMessage!,
-                                style: TextStyle(
-                                  color: AppTheme.incorrect,
-                                  fontSize: 14,
-                                ),
+                                style: TextStyle(color: AppTheme.incorrect, fontSize: 14),
                               ),
                             ),
                           ],
@@ -196,7 +175,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                     );
                   },
                 ),
-
+              
               // Champ Nom (obligatoire)
               _buildTextField(
                 controller: _nameController,
@@ -205,9 +184,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                 icon: Icons.person_outline,
                 textCapitalization: TextCapitalization.words,
               ),
-
+              
               const SizedBox(height: 16),
-
+              
               // Champ Age (optionnel)
               _buildTextField(
                 controller: _ageController,
@@ -217,9 +196,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                 keyboardType: TextInputType.number,
                 maxLength: 2,
               ),
-
+              
               const SizedBox(height: 32),
-
+              
               // Bouton Continuer
               AnimatedScaleButton(
                 onTap: _isLoading ? null : _saveProfile,
@@ -247,22 +226,22 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                           )
                         : const Text(
                             'Continuer',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                           ),
                   ),
                 ),
               ),
-
+              
               const SizedBox(height: 16),
-
+              
               // Note
               Center(
                 child: Text(
                   '* Champ obligatoire',
-                  style: TextStyle(color: AppTheme.textMuted, fontSize: 12),
+                  style: TextStyle(
+                    color: AppTheme.textMuted,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ],
@@ -319,10 +298,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen>
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: const BorderSide(
-                    color: AppTheme.primaryGreen,
-                    width: 2,
-                  ),
+                  borderSide: const BorderSide(color: AppTheme.primaryGreen, width: 2),
                 ),
                 counterText: '',
               ),
@@ -361,10 +337,9 @@ class _AnimatedScaleButtonState extends State<AnimatedScaleButton>
       vsync: this,
       duration: const Duration(milliseconds: 150),
     );
-    _scaleAnimation = Tween<double>(
-      begin: 1.0,
-      end: 0.95,
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.95).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
   }
 
   @override
@@ -388,8 +363,10 @@ class _AnimatedScaleButtonState extends State<AnimatedScaleButton>
       onTapCancel: () => _controller.reverse(),
       child: AnimatedBuilder(
         animation: _scaleAnimation,
-        builder: (context, child) =>
-            Transform.scale(scale: _scaleAnimation.value, child: widget.child),
+        builder: (context, child) => Transform.scale(
+          scale: _scaleAnimation.value,
+          child: widget.child,
+        ),
       ),
     );
   }

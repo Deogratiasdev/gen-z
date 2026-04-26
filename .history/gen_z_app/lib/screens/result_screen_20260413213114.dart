@@ -1,15 +1,3 @@
-// ============================================================================
-// ÉCRAN DES RÉSULTATS FINAUX
-// ----------------------------------------------------------------------------
-// Ce fichier affiche le récapitulatif après avoir terminé le QCM :
-// - Score total et pourcentage de réussite
-// - Nombre de bonnes et mauvaises réponses
-// - Message de félicitations ou encouragement
-// - Bouton pour rejouer un nouveau QCM
-// - Bouton pour retourner à l'accueil
-// - Sauvegarde automatique du résultat dans l'historique
-// ============================================================================
-
 import 'package:flutter/material.dart';
 import '../models/question.dart';
 import '../services/storage_service.dart';
