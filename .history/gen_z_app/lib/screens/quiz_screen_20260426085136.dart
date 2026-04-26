@@ -305,7 +305,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: _getDifficultyColor().withValues(alpha: 0.15),
+                color: _getDifficultyColor().withOpacity(0.15),
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Text(
@@ -323,7 +323,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
               color: _remainingSeconds <= 5
-                  ? AppTheme.incorrect.withValues(alpha: 0.2)
+                  ? AppTheme.incorrect.withOpacity(0.2)
                   : AppTheme.surface,
               borderRadius: BorderRadius.circular(20),
             ),
@@ -433,7 +433,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppTheme.accentPrimary.withValues(alpha: 0.08),
+            color: AppTheme.accentPrimary.withOpacity(0.08),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -445,7 +445,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppTheme.accentPrimary.withValues(alpha: 0.08),
+              color: AppTheme.accentPrimary.withOpacity(0.08),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
@@ -501,7 +501,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         child: Container(
           padding: const EdgeInsets.all(24),
           decoration: BoxDecoration(
-            color: AppTheme.warning.withValues(alpha: 0.08),
+            color: AppTheme.warning.withOpacity(0.08),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Column(
@@ -513,7 +513,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: AppTheme.warning.withValues(alpha: 0.2),
+                      color: AppTheme.warning.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(16),
                     ),
                     child: const Icon(
@@ -549,8 +549,8 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
         padding: const EdgeInsets.all(24),
         decoration: BoxDecoration(
           color: _isCorrect
-              ? AppTheme.correct.withValues(alpha: 0.08)
-              : AppTheme.incorrect.withValues(alpha: 0.08),
+              ? AppTheme.correct.withOpacity(0.08)
+              : AppTheme.incorrect.withOpacity(0.08),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -563,8 +563,8 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
                   height: 48,
                   decoration: BoxDecoration(
                     color: _isCorrect
-                        ? AppTheme.correct.withValues(alpha: 0.2)
-                        : AppTheme.incorrect.withValues(alpha: 0.2),
+                        ? AppTheme.correct.withOpacity(0.2)
+                        : AppTheme.incorrect.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Icon(
@@ -605,7 +605,7 @@ class _QuizScreenState extends State<QuizScreen> with TickerProviderStateMixin {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: AppTheme.correct.withValues(alpha: 0.08),
+                  color: AppTheme.correct.withOpacity(0.08),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -703,13 +703,12 @@ class _OptionButton extends StatelessWidget {
   Color get _backgroundColor {
     if (!showFeedback) {
       return isSelected
-          ? AppTheme.accentPrimary.withValues(alpha: 0.08)
+          ? AppTheme.accentPrimary.withOpacity(0.08)
           : AppTheme.surface;
     }
-    if (isCorrect) return AppTheme.correct.withValues(alpha: 0.08);
-    if (isSelected && !isCorrect)
-      return AppTheme.incorrect.withValues(alpha: 0.08);
-    return AppTheme.surface.withValues(alpha: 0.3);
+    if (isCorrect) return AppTheme.correct.withOpacity(0.08);
+    if (isSelected && !isCorrect) return AppTheme.incorrect.withOpacity(0.08);
+    return AppTheme.surface.withOpacity(0.3);
   }
 
   Color get _textColor {
@@ -752,7 +751,7 @@ class _OptionButton extends StatelessWidget {
                             : isSelected && !isCorrect
                             ? AppTheme.incorrect
                             : AppTheme.accentPrimary)
-                        .withValues(alpha: 0.15),
+                        .withOpacity(0.15),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -767,7 +766,7 @@ class _OptionButton extends StatelessWidget {
               decoration: BoxDecoration(
                 color: _backgroundColor == AppTheme.surface
                     ? AppTheme.surfaceLight
-                    : _backgroundColor.withValues(alpha: 0.5),
+                    : _backgroundColor.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
@@ -800,7 +799,7 @@ class _OptionButton extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: (isCorrect ? AppTheme.correct : AppTheme.incorrect)
-                      .withValues(alpha: 0.1),
+                      .withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: _trailingIcon!,

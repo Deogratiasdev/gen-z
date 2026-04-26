@@ -60,9 +60,8 @@ class _AuthScreenState extends State<AuthScreen>
 
   String? _validatePassword(String password) {
     if (password.isEmpty) return 'Veuillez entrer un mot de passe';
-    if (password.length < 6) {
+    if (password.length < 6)
       return 'Le mot de passe doit contenir au moins 6 caractères';
-    }
     return null;
   }
 

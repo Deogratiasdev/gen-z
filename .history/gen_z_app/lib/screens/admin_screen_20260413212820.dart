@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/animation.dart';
 import '../theme/app_theme.dart';
 import '../services/admin_service.dart';
 import '../services/supabase_service.dart';
@@ -50,7 +51,7 @@ class _AdminScreenState extends State<AdminScreen> {
           _isLoading = false;
         });
       }
-    } on SocketException catch (_) {
+    } on SocketException catch (e) {
       if (mounted) {
         setState(() {
           _error = 'Pas de connexion internet. Vérifiez votre réseau.';
@@ -371,7 +372,7 @@ class _AdminScreenState extends State<AdminScreen> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: _users.length,
-      separatorBuilder: (_, _) => const SizedBox(height: 8),
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
       itemBuilder: (context, index) {
         final user = _users[index];
         final isAdmin = user['is_admin'] == true;
@@ -429,7 +430,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryGreen.withValues(alpha: 0.2),
+                      color: AppTheme.primaryGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Text(

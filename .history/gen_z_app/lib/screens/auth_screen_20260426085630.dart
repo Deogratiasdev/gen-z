@@ -60,9 +60,8 @@ class _AuthScreenState extends State<AuthScreen>
 
   String? _validatePassword(String password) {
     if (password.isEmpty) return 'Veuillez entrer un mot de passe';
-    if (password.length < 6) {
+    if (password.length < 6)
       return 'Le mot de passe doit contenir au moins 6 caractères';
-    }
     return null;
   }
 
@@ -483,7 +482,7 @@ class _AuthScreenState extends State<AuthScreen>
               boxShadow: hasFocus
                   ? [
                       BoxShadow(
-                        color: AppTheme.primaryGreen.withValues(alpha: 0.3),
+                        color: AppTheme.primaryGreen.withOpacity(0.3),
                         blurRadius: 8,
                         spreadRadius: 1,
                       ),

@@ -752,7 +752,7 @@ class _OptionButton extends StatelessWidget {
                             : isSelected && !isCorrect
                             ? AppTheme.incorrect
                             : AppTheme.accentPrimary)
-                        .withValues(alpha: 0.15),
+                        .withOpacity(0.15),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -767,7 +767,7 @@ class _OptionButton extends StatelessWidget {
               decoration: BoxDecoration(
                 color: _backgroundColor == AppTheme.surface
                     ? AppTheme.surfaceLight
-                    : _backgroundColor.withValues(alpha: 0.5),
+                    : _backgroundColor.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Center(
@@ -800,7 +800,7 @@ class _OptionButton extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: (isCorrect ? AppTheme.correct : AppTheme.incorrect)
-                      .withValues(alpha: 0.1),
+                      .withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: _trailingIcon!,

@@ -429,7 +429,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryGreen.withValues(alpha: 0.2),
+                      color: AppTheme.primaryGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Text(

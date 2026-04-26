@@ -371,7 +371,7 @@ class _AdminScreenState extends State<AdminScreen> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: _users.length,
-      separatorBuilder: (_, _) => const SizedBox(height: 8),
+      separatorBuilder: (_, __) => const SizedBox(height: 8),
       itemBuilder: (context, index) {
         final user = _users[index];
         final isAdmin = user['is_admin'] == true;
@@ -429,7 +429,7 @@ class _AdminScreenState extends State<AdminScreen> {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: AppTheme.primaryGreen.withValues(alpha: 0.2),
+                      color: AppTheme.primaryGreen.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: const Text(

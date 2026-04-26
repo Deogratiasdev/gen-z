@@ -800,7 +800,7 @@ class _OptionButton extends StatelessWidget {
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   color: (isCorrect ? AppTheme.correct : AppTheme.incorrect)
-                      .withValues(alpha: 0.1),
+                      .withOpacity(0.1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: _trailingIcon!,
